@@ -419,7 +419,7 @@ function validateImageData(d) {
     }
     else {
         var data = d.split(",");
-        if(data[1].length == 0){
+        if(data[1].length === 0){
             return false;
         }
     }
