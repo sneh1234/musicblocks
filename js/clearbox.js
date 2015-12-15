@@ -23,7 +23,7 @@ function ClearBox(canvas, stage, refreshCanvas, clear) {
     this.scale = 1;
 
     this.hide = function() {
-        if (this.container != null) {
+        if (this.container !== null) {
             this.container.visible = false;
             this.refreshCanvas();
         }
@@ -31,7 +31,7 @@ function ClearBox(canvas, stage, refreshCanvas, clear) {
 
     this.show = function(scale) {
         this.scale = scale;
-        if (this.container == null) {
+        if (this.container === null) {
             this.container = new createjs.Container();
             this.stage.addChild(this.container);
             this.container.x = Math.floor(((this.canvas.width / scale) - 180) / 2);
