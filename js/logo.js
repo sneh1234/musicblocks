@@ -2447,6 +2447,7 @@ function Logo(matrix, musicnotation, canvas, blocks, turtles, stage,
             var cleanSignals = [];
             var cleanLoops = [];
             var cleanActions = [];
+<<<<<<< HEAD
 <<<<<<< 641feeada0686870a1b8c013468b89b5b790f6a3
             for (var i = 0; i < logo.endOfFlowSignals[turtle][blk].length; i++) {
                 if (logo.endOfFlowSignals[turtle][blk][i] != null) {
@@ -2454,6 +2455,10 @@ function Logo(matrix, musicnotation, canvas, blocks, turtles, stage,
             for (var i = 0; i < logo.endOfFlowSignals[turtle][blk].length; i++) { 
                 if (logo.endOfFlowSignals[turtle][blk][i] !== null) {
 >>>>>>> partial switch to ===
+=======
+            for (var i = 0; i < logo.endOfFlowSignals[turtle][blk].length; i++) { 
+                if (logo.endOfFlowSignals[turtle][blk][i] !== null) {
+>>>>>>> 430b897ddd747612bc0d30984454b95f0092dc30
                     cleanSignals.push(logo.endOfFlowSignals[turtle][blk][i]);
                     cleanLoops.push(logo.endOfFlowLoops[turtle][blk][i]);
                     cleanActions.push(logo.endOfFlowActions[turtle][blk][i]);
