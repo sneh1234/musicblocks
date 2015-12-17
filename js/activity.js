@@ -41,7 +41,7 @@ try {
 }
 
 var lang = document.webL10n.getLanguage();
-if (lang.indexOf("-") != -1) {
+if (lang.indexOf("-") !== -1) {
     lang = lang.slice(0, lang.indexOf("-"));
     document.webL10n.setLanguage(lang);
 }
@@ -206,7 +206,7 @@ console.log(txt);
         var stageX = 0;
         var stageY = 0;
 
-        var onXO = (screen.width == 1200 && screen.height == 900) || (screen.width == 900 && screen.height == 1200);
+        var onXO = (screen.width === 1200 && screen.height === 900) || (screen.width === 900 && screen.height === 1200);
         console.log('on XO? ' + onXO);
 
         var cellSize = 55;
@@ -256,7 +256,7 @@ console.log(txt);
         pluginsImages = {};
 
         function allClear() {
-            if (chartBitmap != null) {
+            if (chartBitmap) {
                 stage.removeChild(chartBitmap);
                 chartBitmap = null;
             }
@@ -321,7 +321,7 @@ console.log(txt);
             for (var turtle in logo.stepQueue) {
                 turtleCount += 1;
             }
-            if (turtleCount == 0 || logo.turtleDelay != TURTLESTEP) {
+            if (turtleCount === 0 || logo.turtleDelay !== TURTLESTEP) {
                 // Either we haven't set up a queue or we are
                 // switching modes.
                 logo.setTurtleDelay(TURTLESTEP);
@@ -544,7 +544,7 @@ console.log(txt);
 
             // Load any macros saved in local storage.
             macroData = storage.macros
-            if (macroData != null) {
+            if (macroData) {
                 processMacroData(macroData, palettes, blocks, macroDict);
             }
             // Blocks and palettes need access to the macros dictionary.
@@ -553,7 +553,7 @@ console.log(txt);
 
             // Load any plugins saved in local storage.
             pluginData = storage.plugins;
-            if (pluginData != null) {
+            if (pluginData) {
                 var obj = processPluginData(pluginData, palettes, blocks, logo.evalFlowDict, logo.evalArgDict, logo.evalParameterDict, logo.evalSetterDict, logo.evalOnStartList, logo.evalOnStopList);
                 updatePluginObj(obj);
             }
@@ -674,7 +674,7 @@ console.log(txt);
                                     projectName = args[1];
                                     break;
                                 case 'run':
-                                    if (args[1].toLowerCase() == 'true')
+                                    if (args[1].toLowerCase() === 'true')
                                         runProjectOnLoad = true;
                                     break;
                                 case 'inurl':
@@ -686,7 +686,7 @@ console.log(txt);
                                             xhr.responseType = 'json';
                                             xhr.onload = function () {
                                                 var status = xhr.status;
-                                                if (status == 200) {
+                                                if (status === 200) {
                                                     resolve(xhr.response);
                                                 } else {
                                                     reject(status);
@@ -715,13 +715,13 @@ console.log(txt);
                     if (urlParts[1].indexOf('=') > 0)
                         var args = urlParts[1].split('=');
                     //File is the only arg that can stand alone
-                    if (args[0].toLowerCase() == 'file') {
+                    if (args[0].toLowerCase() === 'file') {
                         projectName = args[1];
                     }
                 }
             }
 
-            if (projectName != null) {
+            if (projectName) {
                 setTimeout(function () {
                     console.log('load ' + projectName);
                     loadProject(projectName, runProjectOnLoad, env);
@@ -1148,7 +1148,7 @@ console.log(txt);
             if (blocks.visible) {
                 logo.hideBlocks();
             } else {
-                if (chartBitmap != null) {
+                if (chartBitmap) {
                     stage.removeChild(chartBitmap);
                     chartBitmap = null;
                 }
@@ -1276,7 +1276,7 @@ console.log(txt);
             document.body.style.cursor = 'wait';
             // palettes.updatePalettes();
             setTimeout(function () {
-                if (fileExt(projectName) != 'tb') {
+                if (fileExt(projectName) !== 'tb') {
                     projectName += '.tb';
                 }
                 try {
@@ -1324,7 +1324,7 @@ console.log(txt);
             setTimeout(function () {
                 var punctuationless = projectName.replace(/['!"#$%&\\'()\*+,\-\.\/:;<=>?@\[\\\]\^`{|}~']/g, '');
                 projectName = punctuationless.replace(/ /g, '_');
-                if (fileExt(projectName) != 'tb') {
+                if (fileExt(projectName) !== 'tb') {
                     projectName += '.tb';
                 }
                 try {
@@ -1391,7 +1391,7 @@ console.log(txt);
             sessionData = storage['SESSION' + currentProject];
             if (sessionData) {
                 try {
-                    if (sessionData == 'undefined' || sessionData == '[]') {
+                    if (!sessionData || sessionData === []) {
                         console.log('empty session found: loading start');
                         justLoadStart();
                     } else {
@@ -1422,7 +1422,7 @@ console.log(txt);
         }
 
         function textMsg(msg) {
-            if (msgText == null) {
+            if (msgText === null) {
                 // The container may not be ready yet... so do nothing
                 return;
             }
@@ -1434,7 +1434,7 @@ console.log(txt);
         }
 
         function errorMsg(msg, blk, text) {
-            if (errorMsgText == null) {
+            if (errorMsgText === null) {
                 // The container may not be ready yet... so do nothing
                 return;
             }
@@ -1445,7 +1445,7 @@ console.log(txt);
                 var toX = blocks.blockList[blk].x + blocksContainer.x;
                 var toY = blocks.blockList[blk].y + blocksContainer.y;
 
-                if (errorMsgArrow == null) {
+                if (errorMsgArrow === null) {
                     errorMsgArrow = new createjs.Container();
                     stage.addChild(errorMsgArrow);
                 }
@@ -1482,7 +1482,7 @@ console.log(txt);
                     stage.setChildIndex(errorArtwork['negroot'], stage.getNumChildren() - 1);
                     break;
                 case NOACTIONERRORMSG:
-                    if (text == null) {
+                    if (text === null) {
                         text = 'foo';
                     }
                     errorArtwork['nostack'].children[1].text = text;
@@ -1491,7 +1491,7 @@ console.log(txt);
                     stage.setChildIndex(errorArtwork['nostack'], stage.getNumChildren() - 1);
                     break;
                 case NOBOXERRORMSG:
-                    if (text == null) {
+                    if (text === null) {
                         text = 'foo';
                     }
                     errorArtwork['emptybox'].children[1].text = text;
@@ -1590,31 +1590,31 @@ console.log(txt);
                         'pensize': turtle.stroke,
                         'grey': turtle.chroma
                     };
-                } else if (myBlock.name == 'action') {
+                } else if (myBlock.name === 'action') {
                     var args = {
                         'collapsed': myBlock.collapsed
                     }
-                } else if (myBlock.name == 'namedbox') {
+                } else if (myBlock.name === 'namedbox') {
                     var args = {
                         'value': myBlock.privateData
                     }
-                } else if (myBlock.name == 'nameddo') {
+                } else if (myBlock.name === 'nameddo') {
                     var args = {
                         'value': myBlock.privateData
                     }
-                } else if (myBlock.name == 'nameddoArg') {
+                } else if (myBlock.name === 'nameddoArg') {
                     var args = {
                         'value': myBlock.privateData
                     }
-                } else if (myBlock.name == 'namedcalc') {
+                } else if (myBlock.name === 'namedcalc') {
                     var args = {
                         'value': myBlock.privateData
                     }
-                } else if (myBlock.name == 'namedcalcArg') {
+                } else if (myBlock.name === 'namedcalcArg') {
                     var args = {
                         'value': myBlock.privateData
                     }
-                } else if (myBlock.name == 'namedarg') {
+                } else if (myBlock.name === 'namedarg') {
                     var args = {
                         'value': myBlock.privateData
                     }
@@ -1630,7 +1630,7 @@ console.log(txt);
                 connections = [];
                 for (var c = 0; c < myBlock.connections.length; c++) {
                     var mapConnection = blockMap.indexOf(myBlock.connections[c]);
-                    if (myBlock.connections[c] == null || mapConnection == -1) {
+                    if (myBlock.connections[c] === null || mapConnection === -1) {
                         connections.push(null);
                     } else {
                         connections.push(mapConnection);
@@ -1650,7 +1650,7 @@ console.log(txt);
 
         function saveToFile() {
             var filename = prompt('Filename:');
-            if (fileExt(filename) != 'tb') {
+            if (fileExt(filename) !== 'tb') {
                 filename += '.tb';
             }
             download(filename, 'data:text/plain;charset=utf-8,' + encodeURIComponent(prepareExport()));
@@ -1693,7 +1693,7 @@ console.log(txt);
                 var halfSize = Math.floor(cellSize / 2);
 
                 bitmap = new createjs.Bitmap(img);
-                if (cellSize != originalSize) {
+                if (cellSize !== originalSize) {
                     bitmap.scaleX = cellSize / originalSize;
                     bitmap.scaleY = cellSize / originalSize;
                 }
@@ -1761,7 +1761,7 @@ console.log(txt);
                 loadButtonDragHandler(container, x, y, buttonNames[name][1]);
                 onscreenButtons.push(container);
 
-                if (buttonNames[name][0] == 'stop-turtle') {
+                if (buttonNames[name][0] === 'stop-turtle') {
                     stopTurtleContainer = container;
                     stopTurtleContainerX = x;
                     stopTurtleContainerY = y;
@@ -1833,7 +1833,7 @@ console.log(txt);
             helpIdx = 0;
 
             if (firstTime) {
-                if (helpContainer == null) {
+                if (helpContainer === null) {
                     helpContainer = new createjs.Container();
                     stage.addChild(helpContainer);
                     helpContainer.x = 65;
@@ -1979,7 +1979,7 @@ console.log(txt);
 
         function makeButton(name, x, y, size, rotation) {
             var container = new createjs.Container();
-            if (name == 'paste-disabled-button') {
+            if (name === 'paste-disabled-button') {
                 pasteContainer = container;
             }
 
@@ -1994,7 +1994,7 @@ console.log(txt);
                 var halfSize = Math.floor(size / 2);
 
                 bitmap = new createjs.Bitmap(img);
-                if (size != originalSize) {
+                if (size !== originalSize) {
                     bitmap.scaleX = size / originalSize;
                     bitmap.scaleY = size / originalSize;
                 }
@@ -2038,7 +2038,7 @@ console.log(txt);
 
                     container.x = ox;
                     container.y = oy;
-                    if (action != null && moved && !locked) {
+                    if (action && moved && !locked) {
                         locked = true;
                         setTimeout(function () {
                             locked = false;
